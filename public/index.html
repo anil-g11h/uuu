@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            height: 100vh;
+            max-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .screen {
+            display: none;
+            padding: 2rem;
+            flex: 1;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .screen#usernameScreen {
+            justify-content: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .user-type {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .radio-option:hover {
+            border-color: #667eea;
+            background-color: #f8f9ff;
+        }
+
+        .radio-option.selected {
+            border-color: #667eea;
+            background-color: #667eea;
+            color: white;
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .message-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn, .logout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            font-size: 0.9rem;
+            padding: 0.5rem;
+        }
+
+        .submit-btn:hover, .logout-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-details {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .messages-list {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #e1e5e9;
+            border-radius: 10px;
+            padding: 1rem;
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+            min-height: 0;
+        }
+
+        .messages-header {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 0.5rem;
+        }
+
+        .message-item {
+            background: white;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .message-item.user-u {
+            border-left-color: #28a745;
+        }
+
+        .message-item.user-i {
+            border-left-color: #007bff;
+        }
+
+        .message-meta {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-text {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .welcome-screen {
+            text-align: center;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-send {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-input-container {
+            background: white;
+            border-top: 1px solid #e1e5e9;
+            padding: 1rem 2rem;
+            border-radius: 0 0 20px 20px;
+            margin: 0 -2rem 0 -2rem;
+            flex-shrink: 0;
+        }
+
+        .quick-send input {
+            flex: 1;
+        }
+
+        .quick-send button {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .quick-send button:hover {
+            background: #5a6fd8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Username Setup Screen -->
+        <div id="usernameScreen" class="screen active">
+            <div class="welcome-screen">
+                <div class="welcome-icon">👋</div>
+                <div class="header">
+                    <h1>Welcome to Message Client</h1>
+                    <p>Please select your user type to get started</p>
+                </div>
+
+                <form id="usernameForm">
+                    <div class="form-group">
+                        <label>User Type:</label>
+                        <div class="user-type">
+                            <div class="radio-option selected" data-value="u">
+                                <input type="radio" name="userType" value="u" checked>
+                                <span>User (u)</span>
+                            </div>
+                            <div class="radio-option" data-value="i">
+                                <input type="radio" name="userType" value="i">
+                                <span>Internal (i)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Continue to Messages</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Messaging Screen -->
+        <div id="messagingScreen" class="screen">
+            <!-- <div class="user-info">
+                <div class="user-details">
+                    User Type: <span id="currentUserType"></span>
+                </div>
+                <button class="logout-btn" onclick="logout()">Change User Type</button>
+            </div> -->
+
+            <div id="status" class="status"></div>
+
+            <div class="messages-list">
+                <div class="messages-header">Recent Messages</div>
+                <div id="messagesList"></div>
+            </div>
+
+            <div class="message-input-container">
+                <div class="quick-send">
+                    <input type="text" id="quickMessage" placeholder="Type your message... (Press Enter to send)" maxlength="500">
+                    <button onclick="sendQuickMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('messageAppUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showMessagingScreen();
+            } else {
+                showUsernameScreen();
+            }
+            setupEventListeners();
+        });
+
+        function showUsernameScreen() {
+            document.getElementById('usernameScreen').classList.add('active');
+            document.getElementById('messagingScreen').classList.remove('active');
+        }
+
+        function showMessagingScreen() {
+            document.getElementById('usernameScreen').classList.remove('active');
+            document.getElementById('messagingScreen').classList.add('active');
+            
+            if (currentUser) {
+                document.getElementById('currentUserType').textContent = currentUser.userType.toUpperCase();
+                loadMessages();
+            }
+        }
+
+        function setupEventListeners() {
+            // Username form submission
+            document.getElementById('usernameForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const userType = formData.get('userType');
+
+                currentUser = { userType };
+                localStorage.setItem('messageAppUser', JSON.stringify(currentUser));
+                showMessagingScreen();
+            });
+
+            // Radio button styling for username screen
+            document.querySelectorAll('#usernameScreen .radio-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('#usernameScreen .radio-option').forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    option.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+
+            // Quick message input - Enter to send
+            document.getElementById('quickMessage').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendQuickMessage();
+                }
+            });
+        }
+
+        async function sendQuickMessage() {
+            const messageInput = document.getElementById('quickMessage');
+            const message = messageInput.value.trim();
+
+            if (!message || !currentUser) {
+                return;
+            }
+
+            // Create payload
+            const payload = {
+                m: message,
+                u: currentUser.userType,
+                t: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch('/api/data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showStatus('Message sent!', 'success');
+                    messageInput.value = '';
+                    loadMessages();
+                } else {
+                    showStatus(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                showStatus(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('messageAppUser');
+            currentUser = null;
+            document.getElementById('quickMessage').value = '';
+            document.getElementById('messagesList').innerHTML = '';
+            showUsernameScreen();
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        async function loadMessages() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                
+                const messagesListDiv = document.getElementById('messagesList');
+                messagesListDiv.innerHTML = '';
+                
+                if (data.items.length === 0) {
+                    messagesListDiv.innerHTML = '<div style="text-align: center; color: #666; padding: 2rem;">No messages yet. Be the first to send one!</div>';
+                    return;
+                }
+                
+                // Show last 10 messages
+                const recentMessages = data.items.slice(-10).reverse();
+                
+                recentMessages.forEach(item => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message-item user-${item.u}`;
+                    messageDiv.innerHTML = `
+                        <div class="message-text">${item.m}</div>
+                    `;
+                    messagesListDiv.appendChild(messageDiv);
+                });
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                showStatus('Error loading messages', 'error');
+            }
+        }
+
+        // Auto-refresh messages every 5 seconds when on messaging screen
+        setInterval(() => {
+            if (document.getElementById('messagingScreen').classList.contains('active')) {
+                loadMessages();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
