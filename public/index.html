@@ -477,7 +477,7 @@
                 }
                 
                 // Show last 10 messages
-                const recentMessages = data.items.slice(-10).reverse();
+                const recentMessages = data.items.slice(-10);
                 
                 recentMessages.forEach(item => {
                     const messageDiv = document.createElement('div');
