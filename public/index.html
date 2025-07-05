@@ -406,6 +406,26 @@
             });
         }
 
+        async function fetchWithRetry(url, options, retries = 3, backoff = 500) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    console.error(`Attempt ${i + 1} failed for ${url}. Retrying in ${backoff}ms...`, error);
+                    if (i < retries - 1) {
+                        await new Promise(resolve => setTimeout(resolve, backoff));
+                        backoff *= 2; // Exponential backoff
+                    } else {
+                        throw error;
+                    }
+                }
+            }
+        }
+
         async function sendQuickMessage() {
             const messageInput = document.getElementById('quickMessage');
             const message = messageInput.value.trim();
@@ -422,7 +442,7 @@
             };
 
             try {
-                const response = await fetch('/api/data', {
+                const response = await fetchWithRetry('/api/data', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -432,13 +452,9 @@
 
                 const result = await response.json();
 
-                if (response.ok) {
-                    showStatus('sent!', 'success');
-                    messageInput.value = '';
-                    loadMessages();
-                } else {
-                    showStatus(`Error: ${result.error}`, 'error');
-                }
+                // showStatus('sent!', 'success');
+                messageInput.value = '';
+                loadMessages();
             } catch (error) {
                 showStatus(`Network error: ${error.message}`, 'error');
             }
@@ -465,7 +481,7 @@
 
         async function loadMessages() {
             try {
-                const response = await fetch('/api/data');
+                const response = await fetchWithRetry('/api/data');
                 const data = await response.json();
                 
                 const messagesListDiv = document.getElementById('messagesList');
@@ -489,7 +505,7 @@
                 });
             } catch (error) {
                 console.error('Error loading messages:', error);
-                showStatus('Error loading ', 'error');
+                showStatus('Error loading messages', 'error');
             }
         }
 
