@@ -1,4 +1,4 @@
- [
+[
     {
       "id": 1,
       "message": "Yo",
@@ -40,14 +40,14 @@
       "message": "Ok",
       "username": "g11h",
       "timestamp": "2025-07-05T15:14:37.444Z",
-      "replyingTo": "5"
+      "replyingTo": 5
     },
     {
       "id": 8,
       "message": "👍",
       "username": "g11h",
       "timestamp": "2025-07-05T15:17:53.132Z",
-      "replyingTo": "6"
+      "replyingTo": 6
     },
     {
       "id": 9,
@@ -60,7 +60,7 @@
       "message": "Innu illa",
       "username": "g11h",
       "timestamp": "2025-07-05T16:09:12.579Z",
-      "replyingTo": "9"
+      "replyingTo": 9
     },
     {
       "id": 11,
@@ -199,7 +199,7 @@
       "message": "hamper studio du",
       "username": "g11h",
       "timestamp": "2025-07-05T17:30:28.365Z",
-      "replyingTo": "32"
+      "replyingTo": 32
     },
     {
       "id": 34,
@@ -302,7 +302,7 @@
       "message": "Ayeeee",
       "username": "uuu",
       "timestamp": "2025-07-05T18:15:06.775Z",
-      "replyingTo": "48"
+      "replyingTo": 48
     },
     {
       "id": 51,
@@ -321,7 +321,7 @@
       "message": "En dabbakidino",
       "username": "g11h",
       "timestamp": "2025-07-05T18:15:50.795Z",
-      "replyingTo": "51"
+      "replyingTo": 51
     },
     {
       "id": 54,
@@ -370,7 +370,7 @@
       "message": "Huu nodta idini",
       "username": "g11h",
       "timestamp": "2025-07-05T18:17:49.967Z",
-      "replyingTo": "58"
+      "replyingTo": 58
     },
     {
       "id": 62,
@@ -401,7 +401,7 @@
       "message": "Enu madakke agalla",
       "username": "g11h",
       "timestamp": "2025-07-05T18:18:26.851Z",
-      "replyingTo": "63"
+      "replyingTo": 63
     },
     {
       "id": 67,
@@ -420,7 +420,7 @@
       "message": "Periods ga?",
       "username": "g11h",
       "timestamp": "2025-07-05T18:18:55.802Z",
-      "replyingTo": "67"
+      "replyingTo": 67
     },
     {
       "id": 70,
@@ -511,13 +511,13 @@
       "message": "Yeah",
       "username": "uuu",
       "timestamp": "2025-07-05T18:20:58.347Z",
-      "replyingTo": "81"
+      "replyingTo": 81
     },
     {
       "id": 85,
       "message": "🧡",
       "username": "g11h",
       "timestamp": "2025-07-05T18:21:08.046Z",
-      "replyingTo": "82"
+      "replyingTo": 82
     }
   ]
