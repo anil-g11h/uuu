@@ -1,0 +1,527 @@
+{
+  "total": 85,
+  "items": [
+    {
+      "id": 1,
+      "message": "Yo",
+      "username": "uuu",
+      "timestamp": "2025-07-05T15:02:18.495Z"
+    },
+    {
+      "id": 2,
+      "message": "Hello my kingofmyuniverse",
+      "username": "uuu",
+      "timestamp": "2025-07-05T15:04:47.847Z"
+    },
+    {
+      "id": 3,
+      "message": "Hello queenofmyuniverse",
+      "username": "g11h",
+      "timestamp": "2025-07-05T15:08:25.354Z"
+    },
+    {
+      "id": 4,
+      "message": "Nam Anna vc",
+      "username": "uuu",
+      "timestamp": "2025-07-05T15:13:21.953Z"
+    },
+    {
+      "id": 5,
+      "message": "Amel txt madtini",
+      "username": "uuu",
+      "timestamp": "2025-07-05T15:13:26.917Z"
+    },
+    {
+      "id": 6,
+      "message": "Reach home safe",
+      "username": "uuu",
+      "timestamp": "2025-07-05T15:13:32.552Z"
+    },
+    {
+      "id": 7,
+      "message": "Ok",
+      "username": "g11h",
+      "timestamp": "2025-07-05T15:14:37.444Z",
+      "replyingTo": "5"
+    },
+    {
+      "id": 8,
+      "message": "👍",
+      "username": "g11h",
+      "timestamp": "2025-07-05T15:17:53.132Z",
+      "replyingTo": "6"
+    },
+    {
+      "id": 9,
+      "message": "Reached home?",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:01:03.985Z"
+    },
+    {
+      "id": 10,
+      "message": "Innu illa",
+      "username": "g11h",
+      "timestamp": "2025-07-05T16:09:12.579Z",
+      "replyingTo": "9"
+    },
+    {
+      "id": 11,
+      "message": "Ms palya inda walk madta idini swalpa doora",
+      "username": "g11h",
+      "timestamp": "2025-07-05T16:10:41.709Z"
+    },
+    {
+      "id": 12,
+      "message": "Howda",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:12:21.773Z"
+    },
+    {
+      "id": 13,
+      "message": "😐😐",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:12:29.516Z"
+    },
+    {
+      "id": 14,
+      "message": "Yeshtotige bandiddegt mall ge Neenu",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:12:51.422Z"
+    },
+    {
+      "id": 15,
+      "message": "530",
+      "username": "g11h",
+      "timestamp": "2025-07-05T16:15:14.942Z"
+    },
+    {
+      "id": 16,
+      "message": "😒",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:24:15.329Z"
+    },
+    {
+      "id": 17,
+      "message": "Sorry wait madsidakke",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:24:25.129Z"
+    },
+    {
+      "id": 18,
+      "message": "And thanks wait madidakke",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:24:46.734Z"
+    },
+    {
+      "id": 19,
+      "message": "Sorry Ella en beda I’m happy",
+      "username": "g11h",
+      "timestamp": "2025-07-05T16:33:11.754Z"
+    },
+    {
+      "id": 20,
+      "message": "Reached home",
+      "username": "g11h",
+      "timestamp": "2025-07-05T16:41:23.546Z"
+    },
+    {
+      "id": 21,
+      "message": "I’m happy too",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:49:12.914Z"
+    },
+    {
+      "id": 22,
+      "message": "Oota madu hogu",
+      "username": "uuu",
+      "timestamp": "2025-07-05T16:49:19.854Z"
+    },
+    {
+      "id": 23,
+      "message": "Madta idini ragi mudde",
+      "username": "g11h",
+      "timestamp": "2025-07-05T16:51:41.834Z"
+    },
+    {
+      "id": 24,
+      "message": "Mudde madtidya or oota madtidya",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:05:29.095Z"
+    },
+    {
+      "id": 25,
+      "message": "Oota 😂",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:08:26.428Z"
+    },
+    {
+      "id": 26,
+      "message": "Ok",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:11:19.542Z"
+    },
+    {
+      "id": 27,
+      "message": "😢😢imy",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:12:13.257Z"
+    },
+    {
+      "id": 28,
+      "message": "Wyd",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:20:46.749Z"
+    },
+    {
+      "id": 29,
+      "message": "Siddu ramayanadu trailer torstidda tv allli",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:26:21.905Z"
+    },
+    {
+      "id": 30,
+      "message": "Already miss madta idiya 2hours aytu aste meet madi",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:27:35.034Z"
+    },
+    {
+      "id": 31,
+      "message": "Missing you tumba",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:28:47.398Z"
+    },
+    {
+      "id": 32,
+      "message": "Proud of what you are doing",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:30:08.841Z"
+    },
+    {
+      "id": 33,
+      "message": "hamper studio du",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:30:28.365Z",
+      "replyingTo": "32"
+    },
+    {
+      "id": 34,
+      "message": "🥰🥰🥰",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:41:20.935Z"
+    },
+    {
+      "id": 35,
+      "message": "Wyd",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:41:39.802Z"
+    },
+    {
+      "id": 36,
+      "message": "Idralli time kooda baro thara madu",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:41:54.761Z"
+    },
+    {
+      "id": 37,
+      "message": "Bed male malkond Sumne phone use madta idde",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:44:11.361Z"
+    },
+    {
+      "id": 38,
+      "message": "Yo",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:45:01.499Z"
+    },
+    {
+      "id": 39,
+      "message": "Chess",
+      "username": "uuu",
+      "timestamp": "2025-07-05T17:45:22.179Z"
+    },
+    {
+      "id": 40,
+      "message": "Huu",
+      "username": "g11h",
+      "timestamp": "2025-07-05T17:45:52.825Z"
+    },
+    {
+      "id": 41,
+      "message": "Amma bandra",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:13:39.314Z"
+    },
+    {
+      "id": 42,
+      "message": "Baitidare",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:13:51.450Z"
+    },
+    {
+      "id": 43,
+      "message": "Yaake",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:14:02.559Z"
+    },
+    {
+      "id": 44,
+      "message": "Phone use madbeda heart attack agutte antha",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:14:03.970Z"
+    },
+    {
+      "id": 45,
+      "message": "She saw on tv anthe",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:14:11.665Z"
+    },
+    {
+      "id": 46,
+      "message": "😂",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:14:18.609Z"
+    },
+    {
+      "id": 47,
+      "message": "Heart ye damage agide antha artha agtilla avrge",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:14:42.311Z"
+    },
+    {
+      "id": 48,
+      "message": "Nija but phone use madakke alla nan jothe mathadthirodikke",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:14:42.911Z"
+    },
+    {
+      "id": 49,
+      "message": "Ille mathadu",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:14:49.190Z"
+    },
+    {
+      "id": 50,
+      "message": "Ayeeee",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:15:06.775Z",
+      "replyingTo": "48"
+    },
+    {
+      "id": 51,
+      "message": "Nan Helbeku I’m proud of you anthq",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:15:25.984Z"
+    },
+    {
+      "id": 52,
+      "message": "Msg madakke idella madidya",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:15:46.617Z"
+    },
+    {
+      "id": 53,
+      "message": "En dabbakidino",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:15:50.795Z",
+      "replyingTo": "51"
+    },
+    {
+      "id": 54,
+      "message": "Yaro madtare idella seriously",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:16:10.113Z"
+    },
+    {
+      "id": 55,
+      "message": "Naanu",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:16:22.414Z"
+    },
+    {
+      "id": 56,
+      "message": "Yav janmadalli punya Madidnob",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:16:30.725Z"
+    },
+    {
+      "id": 57,
+      "message": "Ninna padyakke",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:16:36.095Z"
+    },
+    {
+      "id": 58,
+      "message": "Avlig bega Hudga hudku",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:17:01.975Z"
+    },
+    {
+      "id": 59,
+      "message": "Avle nang bega divorce kodu antha keltale",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:17:21.035Z"
+    },
+    {
+      "id": 60,
+      "message": "Antha ankondidini",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:17:36.196Z"
+    },
+    {
+      "id": 61,
+      "message": "Huu nodta idini",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:17:49.967Z",
+      "replyingTo": "58"
+    },
+    {
+      "id": 62,
+      "message": "Anil naneno heltino seriously",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:17:53.135Z"
+    },
+    {
+      "id": 63,
+      "message": "What if I don’t fight for you",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:18:03.535Z"
+    },
+    {
+      "id": 64,
+      "message": "I’m such a loser",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:18:11.733Z"
+    },
+    {
+      "id": 65,
+      "message": "Malkotini",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:18:22.553Z"
+    },
+    {
+      "id": 66,
+      "message": "Enu madakke agalla",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:18:26.851Z",
+      "replyingTo": "63"
+    },
+    {
+      "id": 67,
+      "message": "Yako hotte novvu",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:18:31.056Z"
+    },
+    {
+      "id": 68,
+      "message": "Periods aade, innu bleeding a agtilla",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:18:53.578Z"
+    },
+    {
+      "id": 69,
+      "message": "Periods ga?",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:18:55.802Z",
+      "replyingTo": "67"
+    },
+    {
+      "id": 70,
+      "message": "Afternoon coffee kuddhe",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:19:12.962Z"
+    },
+    {
+      "id": 71,
+      "message": "Gastric ansutte",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:19:18.783Z"
+    },
+    {
+      "id": 72,
+      "message": "It’s not like periods cramp",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:19:26.903Z"
+    },
+    {
+      "id": 73,
+      "message": "Yeno ontar weird feeling",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:19:42.111Z"
+    },
+    {
+      "id": 74,
+      "message": "Novtide",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:19:52.556Z"
+    },
+    {
+      "id": 75,
+      "message": "😭😭",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:20:02.106Z"
+    },
+    {
+      "id": 76,
+      "message": "Gastric ye ansutte",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:07.204Z"
+    },
+    {
+      "id": 77,
+      "message": "Ayth albeda",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:15.206Z"
+    },
+    {
+      "id": 78,
+      "message": "I’ll sleep 😴",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:23.243Z"
+    },
+    {
+      "id": 79,
+      "message": "Neenu malkon",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:28.908Z"
+    },
+    {
+      "id": 80,
+      "message": "Sari",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:20:34.077Z"
+    },
+    {
+      "id": 81,
+      "message": "Get better soon",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:20:42.821Z"
+    },
+    {
+      "id": 82,
+      "message": "Goodnight, see you",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:46.072Z"
+    },
+    {
+      "id": 83,
+      "message": "Tc",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:50.463Z"
+    },
+    {
+      "id": 84,
+      "message": "Yeah",
+      "username": "uuu",
+      "timestamp": "2025-07-05T18:20:58.347Z",
+      "replyingTo": "81"
+    },
+    {
+      "id": 85,
+      "message": "🧡",
+      "username": "g11h",
+      "timestamp": "2025-07-05T18:21:08.046Z",
+      "replyingTo": "82"
+    }
+  ],
+  "timestamp": "2025-07-05T23:16:28.422Z"
+}
