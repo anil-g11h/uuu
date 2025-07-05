@@ -21,7 +21,7 @@ const Message = ({ user, message, getOriginalMessage, onOpenModal, isModal = fal
         <div id={`message-${message.id}`} className={`message-container ${message.username === currentUser ? 'user-i' : 'user-uuu'} ${isHighlighted ? 'highlight' : ''}`} onClick={handleContainerClick}>
             <div className="message-bubble">
                 {originalMessage && (
-                    <div className={`reply-context ${message.username === currentUser ? 'user-i' : 'user-uuu'}`} onClick={handleScrollToOriginal} style={{ cursor: 'pointer' }}>
+                    <div className={`reply-context ${originalMessage.username === currentUser ? 'user-i' : 'user-uuu'}`} onClick={handleScrollToOriginal} style={{ cursor: 'pointer' }}>
                         {/* <div className="reply-context-header">Replying to {originalMessage.u}</div> */}
                         <div className="reply-context-body">{originalMessage.message}</div>
                     </div>
