@@ -317,9 +317,16 @@
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
             color: #333;
-            border-left: 3px solid #007bff;
+            border-left: 3px solid ;
             cursor: pointer;
         }
+        .user-uuu  {
+            border-color: blue;
+        }
+        .user-g11h {
+            border-color: red;
+        }
+
 
         .reply-context-author {
             font-weight: 600;
@@ -385,6 +392,7 @@
                         </div>
                     </div>
 
+                    <button type="submit" class="submit-btn">🔥</button>
                 </form>
             </div>
         </div>
@@ -412,7 +420,7 @@
                 </div>
                 <div class="quick-send">
                     <input type="text" id="quickMessage" placeholder="" maxlength="500">
-                    <button onclick="sendQuickMessage()">🔥</button>
+                    <button onclick="sendQuickMessage()">👍</button>
                 </div>
             </div>
         </div>
@@ -630,8 +638,7 @@
                         const originalMessage = messagesData.find(m => m.id == item.replyingTo);
                         if (originalMessage) {
                             replyContextHTML = `
-                                <div class="reply-context" data-reply-to-id="${originalMessage.id}">
-                                    <div class="reply-context-author">Replying to ${originalMessage.u === 'u' ? 'uuu' : 'g11h'}</div>
+                                <div class="reply-context ${originalMessage.u === 'u' ? 'user-uuu' : 'user-g11h'}" data-reply-to-id="${originalMessage.id}">
                                     <div class="reply-context-text">${originalMessage.m}</div>
                                 </div>
                             `;
@@ -639,7 +646,7 @@
                     }
 
                     const messageItem = document.createElement('div');
-                    messageItem.className = `message-item user-${item.u}`;
+                    messageItem.className = `message-item user-${item.u} ${item.u === 'u' ? 'user-uuu' : 'user-g11h'}`;
                     messageItem.dataset.id = item.id;
                     messageItem.innerHTML = `${replyContextHTML}<div class="message-text">${item.m}</div>`;
 
