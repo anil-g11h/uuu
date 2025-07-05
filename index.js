@@ -16,11 +16,7 @@ const loadData = async () => {
   } catch (error) {
     // If file doesn't exist or is invalid, return default data
     console.log('No existing data file found, using default data');
-    return [
-      { id: 1, m: 'Sample message 1', u: 'u', t: new Date().toISOString() },
-      { id: 2, m: 'Sample message 2', u: 'i', t: new Date().toISOString() },
-      { id: 3, m: 'Sample message 3', u: 'u', t: new Date().toISOString() }
-    ];
+    return [];
   }
 };
 
