@@ -218,21 +218,43 @@
             padding-bottom: 0.5rem;
         }
 
+        .message-wrapper {
+            position: relative;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
         .message-item {
             background: white;
             border-radius: 8px;
             padding: 0.75rem;
-            margin-bottom: 0.5rem;
+            /* margin-bottom: 0.5rem; */
             border-left: 4px solid;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: white; /* Ensure it has a background to hide the actions */
+            position: relative; /* for z-index if needed */
+            z-index: 1;
         }
 
-        .message-item.user-u {
-            border-left-color: #28a745;
+        .message-actions {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            z-index: 0;
         }
 
-        .message-item.user-i {
-            border-left-color: #007bff;
+        .reply-btn {
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            height: 100%;
+            font-weight: 600;
         }
 
         .message-meta {
@@ -287,6 +309,60 @@
         .quick-send button:hover {
             background: #5a6fd8;
         }
+
+        .reply-context {
+            background: #f0f2f5;
+            border-radius: 6px;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #333;
+            border-left: 3px solid #007bff;
+            cursor: pointer;
+        }
+
+        .reply-context-author {
+            font-weight: 600;
+        }
+
+        .reply-context-text {
+            color: #555;
+        }
+
+        #replyingToContainer {
+            padding: 0.5rem 1rem;
+            background: #f0f2f5;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #replyingToContent {
+            font-size: 0.9rem;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #cancelReplyBtn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .highlight {
+            animation: highlight-animation 1.5s ease;
+        }
+
+        @keyframes highlight-animation {
+            0% { background-color: rgba(102, 126, 234, 0.4); }
+            100% { background-color: white; }
+        }
     </style>
 </head>
 <body>
@@ -294,9 +370,15 @@
         <!-- Username Setup Screen -->
         <div id="usernameScreen" class="screen active">
             <div class="welcome-screen">
+                <div class="welcome-icon">👋</div>
+                <div class="header">
+                    <h1>Welcome to Message Client</h1>
+                    <p>Please select your user type to get started</p>
+                </div>
 
                 <form id="usernameForm">
                     <div class="form-group">
+                        <label>User Type:</label>
                         <div class="user-type">
                             <div class="radio-option selected" data-value="u">
                                 <input type="radio" name="userType" value="u" checked>
@@ -309,7 +391,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="submit-btn">👍</button>
+                    <button type="submit" class="submit-btn">Continue to Messages</button>
                 </form>
             </div>
         </div>
@@ -331,6 +413,10 @@
             </div>
 
             <div class="message-input-container">
+                <div id="replyingToContainer" style="display: none;">
+                    <div id="replyingToContent"></div>
+                    <button id="cancelReplyBtn" onclick="cancelReply()">×</button>
+                </div>
                 <div class="quick-send">
                     <input type="text" id="quickMessage" placeholder="" maxlength="500">
                     <button onclick="sendQuickMessage()">🔥</button>
@@ -341,6 +427,8 @@
 
     <script>
         let currentUser = null;
+        let messagesData = []; // Cache messages data
+        let replyingToId = null;
 
         // Check if user is already logged in
         window.addEventListener('DOMContentLoaded', () => {
@@ -364,7 +452,7 @@
             document.getElementById('messagingScreen').classList.add('active');
             
             if (currentUser) {
-                document.getElementById('currentUserType').textContent = currentUser.userType.toUpperCase();
+                // document.getElementById('currentUserType').textContent = currentUser.userType.toUpperCase();
                 loadMessages();
             }
         }
@@ -398,6 +486,50 @@
                     sendQuickMessage();
                 }
             });
+
+            // Event delegation for reply buttons
+            document.getElementById('messagesList').addEventListener('click', (e) => {
+                if (e.target.classList.contains('reply-btn')) {
+                    const messageId = e.target.dataset.id;
+                    setupReply(messageId);
+                    return;
+                }
+
+                const replyContext = e.target.closest('.reply-context');
+                if (replyContext) {
+                    const messageId = replyContext.dataset.replyToId;
+                    const messageToScrollTo = document.querySelector(`.message-item[data-id='${messageId}']`);
+                    if (messageToScrollTo) {
+                        messageToScrollTo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        messageToScrollTo.classList.add('highlight');
+                        setTimeout(() => {
+                            messageToScrollTo.classList.remove('highlight');
+                        }, 1500);
+                    }
+                }
+            });
+        }
+
+        function setupReply(messageId) {
+            replyingToId = messageId;
+            const messageToReply = messagesData.find(item => item.id == messageId);
+
+            if (messageToReply) {
+                document.getElementById('replyingToContent').textContent = `Replying to: "${messageToReply.m}"`;
+                document.getElementById('replyingToContainer').style.display = 'flex';
+                document.getElementById('quickMessage').focus();
+
+                // Close the swipe action
+                const messageItem = document.querySelector(`.message-item[data-id='${messageId}']`);
+                if (messageItem) {
+                    messageItem.style.transform = 'translateX(0)';
+                }
+            }
+        }
+
+        function cancelReply() {
+            replyingToId = null;
+            document.getElementById('replyingToContainer').style.display = 'none';
         }
 
         async function fetchWithRetry(url, options, retries = 3, backoff = 500) {
@@ -432,7 +564,8 @@
             const payload = {
                 m: message,
                 u: currentUser.userType,
-                t: new Date().toISOString()
+                t: new Date().toISOString(),
+                replyingTo: replyingToId
             };
 
             try {
@@ -446,9 +579,14 @@
 
                 const result = await response.json();
 
-                // showStatus('sent!', 'success');
-                messageInput.value = '';
-                loadMessages();
+                if (response.ok) {
+                    // showStatus('sent!', 'success');
+                    messageInput.value = '';
+                    cancelReply();
+                    loadMessages();
+                } else {
+                    showStatus(`Error: ${result.error}`, 'error');
+                }
             } catch (error) {
                 showStatus(`Network error: ${error.message}`, 'error');
             }
@@ -477,6 +615,7 @@
             try {
                 const response = await fetchWithRetry('/api/data');
                 const data = await response.json();
+                messagesData = data.items; // Cache the messages
                 
                 const messagesListDiv = document.getElementById('messagesList');
                 messagesListDiv.innerHTML = '';
@@ -490,13 +629,77 @@
                 const recentMessages = data.items.slice(-10);
                 
                 recentMessages.forEach(item => {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = `message-item user-${item.u}`;
-                    messageDiv.innerHTML = `
-                        <div class="message-text">${item.m}</div>
-                    `;
-                    messagesListDiv.appendChild(messageDiv);
+                    const messageWrapper = document.createElement('div');
+                    messageWrapper.className = 'message-wrapper';
+
+                    let replyContextHTML = '';
+                    if (item.replyingTo) {
+                        const originalMessage = messagesData.find(m => m.id == item.replyingTo);
+                        if (originalMessage) {
+                            replyContextHTML = `
+                                <div class="reply-context" data-reply-to-id="${originalMessage.id}">
+                                    <div class="reply-context-author">Replying to ${originalMessage.u === 'u' ? 'uuu' : 'g11h'}</div>
+                                    <div class="reply-context-text">${originalMessage.m}</div>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    const messageItem = document.createElement('div');
+                    messageItem.className = `message-item user-${item.u}`;
+                    messageItem.dataset.id = item.id;
+                    messageItem.innerHTML = `${replyContextHTML}<div class="message-text">${item.m}</div>`;
+
+                    const messageActions = document.createElement('div');
+                    messageActions.className = 'message-actions';
+                    messageActions.innerHTML = `<button class="reply-btn" data-id="${item.id}">Reply</button>`;
+
+                    messageWrapper.appendChild(messageActions);
+                    messageWrapper.appendChild(messageItem);
+                    messagesListDiv.appendChild(messageWrapper);
+
+                    // Swipe gesture handling
+                    let startX = 0;
+                    let currentX = 0;
+                    let isSwiping = false;
+                    const threshold = -60; // Amount of pixels to swipe to trigger reply
+                    const maxSwipe = -80; // Max distance the message can be swiped
+
+                    messageItem.addEventListener('touchstart', (e) => {
+                        startX = e.touches[0].clientX;
+                        isSwiping = true;
+                        messageItem.style.transition = 'none';
+                    }, { passive: true });
+
+                    messageItem.addEventListener('touchmove', (e) => {
+                        if (!isSwiping) return;
+                        currentX = e.touches[0].clientX;
+                        let diff = currentX - startX;
+
+                        if (diff < 0 && diff > (maxSwipe - 20)) { // Allow a bit of overswipe
+                            messageItem.style.transform = `translateX(${diff}px)`;
+                        }
+                    }, { passive: true });
+
+                    messageItem.addEventListener('touchend', () => {
+                        if (!isSwiping) return;
+                        isSwiping = false;
+                        messageItem.style.transition = 'transform 0.3s ease';
+                        
+                        const diff = currentX - startX;
+
+                        if (diff < threshold) {
+                            messageItem.style.transform = `translateX(${maxSwipe}px)`;
+                        } else {
+                            messageItem.style.transform = 'translateX(0)';
+                        }
+                        startX = 0;
+                        currentX = 0;
+                    });
                 });
+
+                messagesListDiv.scrollTop = messagesListDiv.scrollHeight;
+
             } catch (error) {
                 console.error('Error loading messages:', error);
                 showStatus('Error loading messages', 'error');

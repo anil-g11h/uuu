@@ -72,7 +72,7 @@ app.get('/api/data', async (req, res) => {
 
 // POST endpoint example
 app.post('/api/data', async (req, res) => {
-  const { m, u } = req.body;
+  const { m, u, replyingTo } = req.body;
   
   // Validation
   if (!m || typeof m !== 'string') {
@@ -90,6 +90,10 @@ app.post('/api/data', async (req, res) => {
     u: u,
     t: new Date().toISOString()
   };
+
+  if (replyingTo) {
+    newItem.replyingTo = replyingTo;
+  }
   
   // Add to items array
   items.push(newItem);
