@@ -33,17 +33,16 @@ const saveData = async (data) => {
 // In-memory storage for items (loaded from file)
 let items = await loadData();
 
+// Sort items by timestamp initially (newest first)
+items.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from public directory
-app.use(express.static('public'));
+// Serve static files from client/dist directory
+app.use(express.static(path.join(process.cwd(), 'client/dist')));
 
-// Basic route - redirect to client
-app.get('/', (req, res) => {
-  res.redirect('/index.html');
-});
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -57,48 +56,57 @@ app.get('/health', (req, res) => {
 // Example API endpoint with async/await
 app.get('/api/data', async (req, res) => {
   try {
-    // Return the current items list
-    const data = {
-      total: items.length,
-      items: items,
-      timestamp: new Date().toISOString()
-    };
-    
-    res.json(data);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const totalItems = items.length;
+    const paginatedItems = items.slice(startIndex, endIndex);
+
+    res.json({
+      total: totalItems,
+      page: page,
+      limit: limit,
+      hasMore: endIndex < totalItems,
+      items: paginatedItems,
+      timestamp: new Date().toISOString(),
+    });
   } catch (error) {
+    console.error('Error in /api/data:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // POST endpoint example
 app.post('/api/data', async (req, res) => {
-  const { m, u, replyingTo } = req.body;
+  const { message, username, replyingTo } = req.body;
   
   // Validation
-  if (!m || typeof m !== 'string') {
+  if (!message || typeof message !== 'string') {
     return res.status(400).json({ error: 'Field "m" is required and must be a string' });
   }
   
-  if (!u || (u !== 'u' && u !== 'i')) {
+  if (!username || (username !== 'uuu' && username !== 'g11h')) {
     return res.status(400).json({ error: 'Field "u" is required and must be either "u" or "i"' });
   }
   
   // Create new item
   const newItem = {
     id: items.length > 0 ? Math.max(...items.map(item => item.id)) + 1 : 1,
-    m: m.trim(),
-    u: u,
-    t: new Date().toISOString()
+    message: message.trim(),
+    username,
+    timestamp: new Date().toISOString()
   };
 
   if (replyingTo) {
     newItem.replyingTo = replyingTo;
   }
   
-  // Add to items array
-  items.push(newItem);
+  // Add to the beginning of the items array to maintain sort order
+  items.unshift(newItem);
   
-  // Save to file
+  // Save updated data
   await saveData(items);
   
   res.status(201).json({
@@ -152,13 +160,19 @@ app.delete('/api/data/:id', async (req, res) => {
 });
 
 // 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    error: 'Route not found',
-    path: req.originalUrl,
-    method: req.method
-  });
+// app.use('*', (req, res) => {
+//   res.status(404).json({
+//     error: 'Route not found',
+//     path: req.originalUrl,
+//     method: req.method
+//   });
+// });
+
+// For any other request, serve the index.html file from the client/dist folder
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'client/dist', 'index.html'));
 });
+
 
 // Error handling middleware
 app.use((error, req, res, next) => {

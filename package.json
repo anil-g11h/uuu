@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "build": "npm install && cd client && npm install && npm run build",
+    "dev": "concurrently \"npm:dev:watch\" \"npm:dev --prefix client\"",
     "dev:watch": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +17,7 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "nodemon": "^3.1.10"
   }
 }
